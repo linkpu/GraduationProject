@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% block title %}
+    Profile
+{% endblock title %}
+{% block linkscript %}
+    {{ block.super }}
+    <link href="/static/station/css/profile.css" rel="stylesheet">
+{% endblock linkscript %}
+
+{% block header %}
+    <li><a class="waves-effect waves-dark" href="/station/index">Home</a></li>
+    <li class="dropdown">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle waves-effect waves-dark">About Us <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a class="waves-effect waves-dark" href="/station/about">Company</a></li>
+            <li><a class="waves-effect waves-dark" href="#">Our Team</a></li>
+            <li><a class="waves-effect waves-dark" href="#">News</a></li>
+            <li><a class="waves-effect waves-dark" href="#">Investors</a></li>
+        </ul>
+    </li>
+    <li><a class="waves-effect waves-dark" href="/station/services">Services</a></li>
+    <li><a class="waves-effect waves-dark" href="/station/portfolio">Portfolio</a></li>
+    <li><a class="waves-effect waves-dark" href="/station/pricing">Pricing</a></li>
+    <li><a class="waves-effect waves-dark" href="/station/contact">Contact</a></li>
+
+{% endblock header %}
+
+{% block content %}
+    <div>
+
+    <form id="base-info" class="form-inline" role="form">
+
+        {% csrf_token %}
+        基础信息: <button type="button" class="btn btn-default" id="base-modify" onclick="base_modification()">编辑</button>
+        <input type="submit" class="btn btn-default" value="保存" id="base-submit" >
+        <button type="button" class="btn btn-default" id="base-reload" onclick="form_reload()">取消</button>
+        <br/>
+        <br/>
+        头像: <img src="">
+        <br/>
+        姓名:
+        <input type="text" value="{{ stu.stu_name }}" class="base-read-only" readonly name="stu_name" id="stu_name">
+        <br/>
+        学号:
+            {% if stu.stu_num == None %}
+                <input type="text" value="" class="base-read-only" readonly name="stu_num" id="stu_num">
+            {% else %}
+                <input type="text" value="{{ stu.stu_num }}" class="base-read-only" readonly name="stu_num" id="stu_num">
+            {% endif %}
+        <br/>
+        出生年月:
+            {% if stu.stu_birth == 'None' %}
+                <input type="date" class="base-read-only" readonly value="" id="stu_birth">
+            {% else %}
+                <input type="date" class="base-read-only" readonly value="{{ stu.stu_birth }}" id="stu_birth">
+            {% endif %}
+        <br/>
+        性别:<div><label class="radio-inline">
+        <input type="radio" name="sex" value="male" checked> 男
+        </label>
+        <label class="radio-inline">
+        <input type="radio" name="sex" value="femal"> 女
+        </label>
+        </div>
+        <br/>
+
+        籍贯: <select class="form-control base-disabled" disabled id="province">
+                <option value="" class="default">--请选择 省--</option>
+                {% for province in positions.provinces %}
+                    {% if native.province != None and native.province.area_name == province.area_name %}
+                        <option value="{{ province.code_id }}" selected>{{ province.area_name }}</option>
+                    {% else %}
+                        <option value="{{ province.code_id }}">{{ province.area_name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <select class="form-control base-disabled" disabled id="city">
+                <option value="" class="default">--请选择 市--</option>
+                {% if positions.cities %}
+                    {% for city in positions.cities %}
+                        {% if native.city != None and native.city.area_name == city.area_name %}
+                            <option value="{{ city.code_id }}" selected>{{ city.area_name }}</option>
+                        {% else %}
+                            <option value="{{ city.code_id }}">{{ city.area_name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </select>
+            <select class="form-control base-disabled" disabled id="area">
+                <option value="" class="default">--请选择 区(县)--</option>
+                {% if positions.areas %}
+                    {% for area in positions.areas %}
+                        {% if native.area != None and native.area.area_name == area.area_name %}
+                            <option value="{{ area.code_id }}" selected>{{ area.area_name }}</option>
+                        {% else %}
+                            <option value="{{ area.code_id }}">{{ area.area_name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </select>
+        <br/>
+        签名:
+            {% if stu.stu_motto == None %}
+                <input type="text" class="base-read-only" readonly value="" id="stu_motto" name="stu_motto">
+            {% else %}
+                <input type="text" class="base-read-only" readonly value="{{ stu.stu_motto }}" id="stu_motto" name="stu_motto">
+            {% endif %}
+        <br/>
+        院校:
+            <select class="form-control base-disabled" disabled id="school_area">
+                <option value="" class="default">--学校省份--</option>
+                {% for province in positions.provinces %}
+                    {% if stu.academy != None and province.code_id == stu.academy.area_id %}
+                        <option value="{{ province.code_id }}" selected>{{ province.area_name }}</option>
+                    {% else %}
+                        <option value="{{ province.code_id }}">{{ province.area_name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <select class="form-control base-disabled" disabled id="school">
+                <option value="" class="default">--学校--</option>
+{#                {% if stu.association != None %}#}
+                {% for school in schools.schools %}
+                    {% if school.id == stu.academy_id %}
+                        <option value="{{ school.id }}" selected>{{ school.school_name }}</option>
+                    {% else %}
+                        <option value="{{ school.id }}">{{ school.school_name }}</option>
+                    {% endif %}
+                {% endfor %}
+{#                {% endif %}#}
+            </select>
+            专业:
+            <select class="form-control base-disabled" disabled id="major">
+                <option value="" class="default">--专业--</option>
+                {% if stu.major != None %}
+                    {% for major in schools.stu_school_majors %}
+                        {% if major.id == stu.major_id %}
+                            <option value="{{ major.id }}" selected>{{ major.major_name }}</option>
+                        {% else %}
+                            <option value="{{ major.id }}">{{ major.major_name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </select>
+        <br/>
+    </form>
+    </div>
+    <div>
+    <br/>
+    <br/>
+    <form id="num-info">
+        {% csrf_token %}
+        账号信息: <button type="button" class="btn btn-default" id="num-modify" onclick="num_modification()">编辑</button>
+        <input type="submit" value="保存" class="btn btn-default" id="num-submit" >
+        <button type="button" class="btn btn-default" id="num-reload" onclick="form_reload()">取消</button>
+        <br/>
+        <br/>
+        手机: <input type="text" class="num-read-only" readonly value="{{ stu.stu_tel }}" id="stu_tel" name="stu_tel">
+        <input type="text" class="num-hidden" id="vercode">
+        <button type="button" class="num-hidden" id="get-code">获取验证码</button>
+        <br/>
+        邮箱:
+            {% if stu.stu_mail == None %}
+                <input type="text" class="num-read-only" readonly value="" id="stu_mail" name="stu_mail">
+            {% else %}
+                <input type="text" class="num-read-only" readonly value="{{ stu.stu_mail }}" id="stu_mail" name="stu_mail">
+            {% endif %}
+        更新密码: <input type="password" class="num-read-only" readonly value="" id="stu_pwd" name="stu_pwd">
+        确认密码: <input type="password" class="num-read-only" readonly value="" id="confirm-pwd" name="confirm-pwd">
+        成长值: <input type="text" readonly value="{{ stu.stu_growth }}">
+        <br/>
+        注册时间: <input type="text" readonly value="{{ stu.join_time }}">
+        <br/>
+        <br/>
+    </form>
+    </div>
+
+{% endblock content %}
+{% block script %}
+    <script src="/static/station/js/profile.js"></script>
+    <script src="/static/station/js/school_area.js"></script>
+    <script src="/static/station/js/position.js"></script>
+{% endblock script %}

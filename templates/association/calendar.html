@@ -1,0 +1,245 @@
+{% extends 'association/base.html' %}
+
+{% block title %}Detail Admin - Calendar{% endblock %}
+{% block linkscript %}
+    <!-- libraries -->
+    <link href='/static/association/css/lib/fullcalendar.css' rel='stylesheet' />
+    <link href='/static/association/css/lib/fullcalendar.print.css' rel='stylesheet' media='print' />
+    
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="/static/association/css/compiled/calendar.css" type="text/css" media="screen" />
+
+    <!-- open sans font -->
+    <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+{% endblock %}
+
+{% block navbar %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <!-- sidebar -->
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li>
+                <a href="index.html">
+                    <i class="icon-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="chart-showcase.html">
+                    <i class="icon-signal"></i>
+                    <span>Charts</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>社团成员</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/association/member_list/">成员列表</a></li>
+                    <li><a href="/association/new_member/">添加成员</a></li>
+                    <li><a href="user-profile.html">User profile</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-edit"></i>
+                    <span>活动管理</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/association/activity_list/">活动列表</a></li>
+                    <li><a href="/association/create_activity/">创建活动</a></li>
+                    <li><a href="activity-wizard.html">Form wizard</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/association/gallery_list//">
+                    <i class="icon-picture"></i>
+                    <span>社团相册</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="calendar.html">
+                    <div class="pointer">
+                        <div class="arrow"></div>
+                        <div class="arrow_border"></div>
+                    </div>
+                    <i class="icon-calendar-empty"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li>
+                <a href="tables.html">
+                    <i class="icon-th-large"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle ui-elements" href="#">
+                    <i class="icon-code-fork"></i>
+                    <span>UI Elements</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="ui-elements.html">UI Elements</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="personal-info.html">
+                    <i class="icon-cog"></i>
+                    <span>My Info</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-share-alt"></i>
+                    <span>Extras</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="code-editor.html">Code editor</a></li>
+                    <li><a href="grids.html">Grids</a></li>
+                    <li><a href="signin.html">Sign in</a></li>
+                    <li><a href="signup.html">Sign up</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+
+	<!-- main container -->
+    <div class="content">
+        
+        <!-- settings changer -->
+        <div class="skins-nav">
+            <a href="#" class="skin first_nav selected">
+                <span class="icon"></span><span class="text">Default</span>
+            </a>
+            <a href="#" class="skin second_nav" data-file="/static/academy/css/skins/dark.css">
+                <span class="icon"></span><span class="text">Dark skin</span>
+            </a>
+        </div>
+
+        <div class="container-fluid">
+            <div id="pad-wrapper">
+                <div class="row-fluid calendar-wrapper">
+                    <div class="span12">
+
+                        <!-- div that fullcalendar plugin uses  -->
+                        <div id='calendar'></div>
+
+                        <!-- edit image pop up -->
+                        <div class="new-event popup">
+                            <div class="pointer">
+                                <div class="arrow"></div>
+                                <div class="arrow_border"></div>
+                            </div>
+                            <i class="close-pop table-delete"></i>
+                            <h5>New event popup example</h5>
+                            <div class="field">
+                                Date: 
+                                <span class="date">Thu, 18 April</span>
+                            </div>
+                            <div class="field">
+                                Event:
+                                <input type="text" class="event-input" />
+                            </div>
+                            <input type="submit" value="Create" class="btn-glow primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+{% endblock %}
+
+
+{% block script %}
+	<!-- scripts for this page -->
+    <script src="/static/association/js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script src='/static/association/js/fullcalendar.min.js'></script>
+    <script src="/static/association/js/theme.js"></script>
+
+    <!-- builds fullcalendar example -->
+    <script>
+        $(document).ready(function() {
+        
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+            
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'month,agendaWeek,agendaDay',
+                    center: 'title',
+                    right: 'today prev,next'
+                },
+                selectable: true,
+                selectHelper: true,
+                editable: true,
+                events: [
+                    {
+                        title: 'All Day Event',
+                        start: new Date(y, m, 1)
+                    },
+                    {
+                        title: 'Long Event',
+                        start: new Date(y, m, d-5),
+                        end: new Date(y, m, d-2)
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: new Date(y, m, d-3, 16, 0),
+                        allDay: false
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: new Date(y, m, d+4, 16, 0),
+                        allDay: false
+                    },
+                    {
+                        title: 'Meeting',
+                        start: new Date(y, m, d, 10, 30),
+                        allDay: false
+                    },
+                    {
+                        title: 'Lunch',
+                        start: new Date(y, m, d, 12, 0),
+                        end: new Date(y, m, d, 14, 0),
+                        allDay: false
+                    },
+                    {
+                        title: 'Birthday Party',
+                        start: new Date(y, m, d+1, 19, 0),
+                        end: new Date(y, m, d+1, 22, 30),
+                        allDay: false
+                    },
+                    {
+                        title: 'Click for Google',
+                        start: new Date(y, m, 28),
+                        end: new Date(y, m, 29),
+                        url: 'http://google.com/'
+                    }
+                ],
+                eventBackgroundColor: '#278ccf'
+            });
+            
+            // handler to close the new event popup just for displaying purposes
+            // more documentation for fullcalendar on http://arshaw.com/fullcalendar/
+            $(".popup .close-pop").click(function () {
+                $(".new-event").fadeOut("fast");
+            });
+        });
+    </script>
+{% endblock %}

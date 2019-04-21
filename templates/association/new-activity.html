@@ -1,0 +1,490 @@
+{% extends 'association/base.html' %}
+
+{% block title %}创建活动{% endblock %}
+
+{% block linkscript %}
+    <!-- libraries -->
+    <link href="/static/association/css/lib/bootstrap-wysihtml5.css" type="text/css" rel="stylesheet" />
+    <link href="/static/association/css/lib/uniform.default.css" type="text/css" rel="stylesheet" />
+    <link href="/static/association/css/lib/select2.css" type="text/css" rel="stylesheet" />
+    <link href="/static/association/css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet" />
+    <link href="/static/association/css/lib/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+    <link href="/static/association/css/lib/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+
+    
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="/static/association/css/compiled/form-showcase.css" type="text/css" media="screen" />
+
+    <!-- open sans font -->
+    <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+{% endblock %}
+
+
+{% block navbar %}
+    {{ block.super }}
+
+
+{% endblock %}
+
+{% block content %}
+    <!-- sidebar -->
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li>
+                <a href="index.html">
+                    <i class="icon-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="chart-showcase.html">
+                    <i class="icon-signal"></i>
+                    <span>Charts</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>社团成员</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/association/member_list/">成员列表</a></li>
+                    <li><a href="/association/new_member/">添加成员</a></li>
+                    <li><a href="user-profile.html">User profile</a></li>
+                </ul>
+            </li>
+            <li class="active">
+                <a class="dropdown-toggle" href="#">
+                    <div class="pointer">
+                        <div class="arrow"></div>
+                        <div class="arrow_border"></div>
+                    </div>
+                    <i class="icon-edit"></i>
+                    <span>活动管理</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="active submenu">
+                    <li><a href="/association/activity_list/" class="active">活动列表</a></li>
+                    <li><a href="/association/create_activity/" class="active">创建活动</a></li>
+                    <li><a href="activity-wizard.html">Form wizard</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/association/gallery_list//">
+                    <i class="icon-picture"></i>
+                    <span>社团相册</span>
+                </a>
+            </li>
+            <li>
+                <a href="calendar.html">
+                    <i class="icon-calendar-empty"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li>
+                <a href="tables.html">
+                    <i class="icon-th-large"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle ui-elements" href="#">
+                    <i class="icon-code-fork"></i>
+                    <span>UI Elements</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="ui-elements.html">UI Elements</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="personal-info.html">
+                    <i class="icon-cog"></i>
+                    <span>My Info</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-share-alt"></i>
+                    <span>Extras</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="code-editor.html">Code editor</a></li>
+                    <li><a href="grids.html">Grids</a></li>
+                    <li><a href="signin.html">Sign in</a></li>
+                    <li><a href="signup.html">Sign up</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+
+	<!-- main container -->
+    <div class="content">
+        
+        <!-- settings changer -->
+        <div class="skins-nav">
+            <a href="#" class="skin first_nav selected">
+                <span class="icon"></span><span class="text">Default</span>
+            </a>
+            <a href="#" class="skin second_nav" data-file="/static/academy/css/skins/dark.css">
+                <span class="icon"></span><span class="text">Dark skin</span>
+            </a>
+        </div>
+        
+        <div class="container-fluid">
+            <div id="pad-wrapper" class="form-page">
+                <div class="row-fluid form-wrapper">
+                    <!-- left column -->
+                    <div class="span8 column">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="association_id" value="{{ association_id }}">
+                            <input type="hidden" name="submit_code" value="{{ submit_code }}">
+                            <div class="field-box">
+                                <label>活动名称:</label>
+                                <input class="span8" name="activity_name" value="{{ activity.activity_name }}" id="activity_name" type="text" />
+                                {{ form.errors.activity_name }}
+                            </div>
+                            <div class="field-box">
+                                <label>开始时间:</label>
+                                <input class="span6 inline-input datetimepicker" type="text" value="{{ activity.activity_start }}" data-date-format="yyyy-mm-dd hh:ii" name="activity_start">
+                                {{ form.errors.activity_start }}
+                            </div>
+                            <div class="field-box">
+                                <label>结束时间:</label>
+                                <input class="span6 inline-input datetimepicker" type="text" value="{{ activity.activity_end }}" data-date-format="yyyy-mm-dd hh:ii" name="activity_end">
+                                {{ form.errors.activity_end }}
+                            </div>
+                            <div class="field-box">
+                                <label>活动地点:</label>
+                                <input class="span8 inline-input" data-toggle="tooltip" value="{{ activity.activity_site }}" name="activity_site" data-trigger="focus" title="Please insert a valid email address" data-placement="right" type="text" />
+                                {{ form.errors.activity_site }}
+                            </div>
+{#                            <div class="field-box">#}
+{#                                <label>Predefined value:</label>#}
+{#                                <div class="predefined">#}
+{#                                    <span class="value">http://</span>#}
+{#                                    <input class="span8 inline-input" type="text" />#}
+{#                                </div>                                #}
+{#                            </div>#}
+{#                            <div class="field-box">#}
+{#                                <label>With max length:</label>#}
+{#                                <input class="span8 inline-input" type="text" placeholder="max 20 characters here" maxlength="20" />#}
+{#                            </div>                            #}
+                            <div class="field-box">
+                                <label>活动标签:</label>
+                                <select multiple="" name="activity_lable" class="span8 select2">
+                                    <option />
+                                    <option value="AK" />Alaska
+                                    <option value="HI" />Hawaii
+                                </select>
+                            </div>
+{#                            <div class="field-box">#}
+{#                                <label>Checkboxes:</label>#}
+{#                                <label class="checkbox">#}
+{#                                    <input type="checkbox" /> Option 1#}
+{#                                </label>#}
+{#                                <label class="checkbox">#}
+{#                                    <input type="checkbox" /> Option 2#}
+{#                                </label>#}
+{#                                <label class="checkbox">#}
+{#                                    <input type="checkbox" /> Option 3#}
+{#                                </label>#}
+{#                            </div>#}
+                            <div class="field-box">
+                                <label>报名条件:</label>
+                                <select name="activity_condition" class="span8 select2">
+                                    {% for c in join_conditions %}
+                                        {% if activity and activity.activity_condition == c.0 %}
+                                            <option value="{{ c.0 }}" selected />{{ c.1 }}
+                                        {% else %}
+                                            <option value="{{ c.0 }}" />{{ c.1 }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {{ form.errors.activity_condition }}
+                                <input type="text" style="display: none" placeholder="设置参与金额" value="{{ activity.join_fee }}" name="join_fee">
+                                {{ form.errors.join_fee }}
+                            </div>
+                            <div class="field-box">
+                                <label>活动详情:</label>
+                                <div class="wysi-column">
+                                    <textarea id="wysi" name="activity_detail" class="span10 wysihtml5" rows="5">{{ activity.activity_detail|safe }}</textarea>
+                                </div>
+                                {{ form.errors.activity_detail }}
+                            </div>
+                            <div class="field-box">
+                                <label>活动备注:</label>
+                                <textarea name="activity_remark" class="span8 wysihtml5" rows="5">{{ activity.activity_remark }}</textarea>
+                                {{ form.errors.activity_activity_remark }}
+                            </div>
+                            <div class="field-box">
+                                <label>活动材料:</label>
+                                <input class="span2 inline-input" type="file" value="" name="activity_file">
+                                {{ form.errors.activity_file }}
+                            </div>
+                            <div class="field-box">
+                                <label>提交状态:</label>
+                                <div class="wysi-column">
+                                    {% if activity %}
+                                        {% for s in status %}
+                                            {% if s.0 == activity.activity_status %}
+                                                <input type="hidden" name="activity_status" value="{{ s.0 }}">
+                                                {{ s.1 }}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <input type="hidden" value="{{ activity.id }}" name="activity_id" >
+                                    {% else %}
+                                        待保存或提交
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="field-box">
+                                <label>提交选项:</label>
+                                <div class="span8">
+                                    {% if activity and activity.activity_status == 4 %}
+                                        <label class="radio">
+                                            <input type="radio" name="submit_options" id="optionsRadios1" value="3" checked="" />
+                                            发布活动
+                                        </label>
+                                    {% else %}
+                                        <label class="radio">
+                                            <input type="radio" name="submit_options" id="optionsRadios1" value="1" checked="" />
+                                            提交活动申请
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="submit_options" id="optionsRadios2" value="2" />
+                                            保存活动
+                                        </label>
+                                    {% endif %}
+                                    {{ form.errors.activity_options }}
+                                </div>
+                            </div>
+                            <div class="span11 field-box actions">
+                                {% if activity %}
+                                    <input type="hidden" name="activity_id" value="{{ activity.id }}">
+                                    {% if activity.activity_status == 1 %}
+                                        <input type="submit" name="submit" class="btn-glow primary" value="提交" />
+                                    {% elif activity.activity_status == 6 %}
+                                        <input type="submit" name="submit" class="btn-glow primary" value="提前开始" />
+                                    {% elif activity.activity_status == 7 %}
+                                        <input type="submit" name="submit" class="btn-glow primary" value="停止活动" />
+                                    {% elif activity.activity_status == 8 %}
+                                    {% elif activity.activity_status == 4 %}
+                                        <input type="submit" name="submit" class="btn-glow primary" value="发布" />
+                                    {% else %}
+                                        <input type="submit" name="submit" class="btn-glow primary" value="重新提交" />
+                                    {% endif %}
+                                {% else %}
+                                    <input type="submit" name="submit" class="btn-glow primary" value="提交" />
+                                {% endif %}
+                                {{ form.errors.submit }}
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- right column -->
+                    <div class="span4 column pull-right">
+                        <label>已创建的活动:</label>
+                        <br/>
+                        <br/>
+                        {% for act in activities %}
+                            <div class="field-box">
+                                <label>
+                                    <a href="/association/create_activity/{{ act.id }}/">
+                                        {{ act.activity_name }}
+                                    </a>
+                                </label>
+                                <span class="subtext">{{ act.activity_start }} - {{ act.activity_end }}</span>
+                            </div>
+                        {% endfor %}
+                        <form />
+                            <div class="field-box">
+                                <label>Select:</label>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected="" />Dropdown
+                                        <option />Custom selects
+                                        <option />Pure css styles
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field-box">
+                                <label>Select2 plugin styled:</label>
+                                <select style="width:250px" class="select2">
+                                    <option />
+                                    <option value="AK" />Alaska
+                                    <option value="HI" />Hawaii
+                                    <option value="CA" />California
+                                    <option value="NV" />Nevada
+                                    <option value="OR" />Oregon
+                                    <option value="WA" />Washington
+                                    <option value="AZ" />Arizona
+                                    <option value="CO" />Colorado
+                                    <option value="ID" />Idaho
+                                    <option value="MT" />Montana
+                                    <option value="NE" />Nebraska
+                                    <option value="NM" />New Mexico
+                                    <option value="ND" />North Dakota
+                                    <option value="UT" />Utah
+                                    <option value="WY" />Wyoming
+                                    <option value="AL" />Alabama
+                                    <option value="AR" />Arkansas
+                                    <option value="IL" />Illinois
+                                    <option value="IA" />Iowa
+                                    <option value="KS" />Kansas
+                                    <option value="KY" />Kentucky
+                                    <option value="LA" />Louisiana
+                                    <option value="MN" />Minnesota
+                                    <option value="MS" />Mississippi
+                                    <option value="MO" />Missouri
+                                    <option value="OK" />Oklahoma
+                                    <option value="SD" />South Dakota
+                                    <option value="TX" />Texas
+                                    <option value="TN" />Tennessee
+                                    <option value="WI" />Wisconsin
+                                    <option value="CT" />Connecticut
+                                    <option value="DE" />Delaware
+                                    <option value="FL" />Florida
+                                    <option value="GA" />Georgia
+                                    <option value="IN" />Indiana
+                                    <option value="ME" />Maine
+                                    <option value="MD" />Maryland
+                                    <option value="MA" />Massachusetts
+                                    <option value="MI" />Michigan
+                                    <option value="NH" />New Hampshire
+                                    <option value="NJ" />New Jersey
+                                    <option value="NY" />New York
+                                    <option value="NC" />North Carolina
+                                    <option value="OH" />Ohio
+                                    <option value="PA" />Pennsylvania
+                                    <option value="RI" />Rhode Island
+                                    <option value="SC" />South Carolina
+                                    <option value="VT" />Vermont
+                                    <option value="VA" />Virginia
+                                    <option value="WV" />West Virginia
+                                </select>
+                            </div>
+                            <div class="field-box">
+                                <label>Select2 multiselect:</label>
+                                <select style="width:250px" multiple="" class="select2">
+                                    <option />
+                                    <option value="AK" />Alaska
+                                    <option value="HI" selected="" />Hawaii
+                                    <option value="CA" />California
+                                    <option value="NV" />Nevada
+                                    <option value="OR" />Oregon
+                                    <option value="WA" />Washington
+                                    <option value="AZ" />Arizona
+                                    <option value="CO" />Colorado
+                                    <option value="ID" />Idaho
+                                    <option value="MT" />Montana
+                                    <option value="NE" />Nebraska
+                                    <option value="NM" />New Mexico
+                                    <option value="ND" />North Dakota
+                                    <option value="UT" />Utah
+                                    <option value="WY" />Wyoming
+                                    <option value="AL" />Alabama
+                                    <option value="AR" />Arkansas
+                                    <option value="IL" />Illinois
+                                    <option value="IA" />Iowa
+                                    <option value="KS" />Kansas
+                                    <option value="KY" />Kentucky
+                                    <option value="LA" />Louisiana
+                                    <option value="MN" />Minnesota
+                                    <option value="MS" />Mississippi
+                                    <option value="MO" />Missouri
+                                    <option value="OK" />Oklahoma
+                                    <option value="SD" />South Dakota
+                                    <option value="TX" />Texas
+                                    <option value="TN" />Tennessee
+                                    <option value="WI" />Wisconsin
+                                    <option value="CT" />Connecticut
+                                    <option value="DE" />Delaware
+                                    <option value="FL" />Florida
+                                    <option value="GA" />Georgia
+                                    <option value="IN" />Indiana
+                                    <option value="ME" />Maine
+                                    <option value="MD" />Maryland
+                                    <option value="MA" />Massachusetts
+                                    <option value="MI" />Michigan
+                                    <option value="NH" />New Hampshire
+                                    <option value="NJ" />New Jersey
+                                    <option value="NY" />New York
+                                    <option value="NC" />North Carolina
+                                    <option value="OH" />Ohio
+                                    <option value="PA" />Pennsylvania
+                                    <option value="RI" />Rhode Island
+                                    <option value="SC" />South Carolina
+                                    <option value="VT" />Vermont
+                                    <option value="VA" />Virginia
+                                    <option value="WV" />West Virginia
+                                </select>
+                            </div>
+                            <div class="field-box">
+                                <label>Input prepend & append:</label>
+                                <div class="input-prepend">
+                                    <span class="add-on">@</span>
+                                    <input class="input-large" type="text" />
+                                </div>
+                                <div class="input-append">
+                                    <input class="input-large" type="text" />
+                                    <span class="add-on">.00</span>
+                                </div>
+                            </div>
+                            <div class="field-box">
+                                <label>Datepicker:</label>
+                                <input type="text" value="03/29/2014" class="input-large datepicker" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+{% endblock %}
+
+
+{% block script %}
+	<!-- scripts for this page -->
+    <script src="/static/association/js/wysihtml5-0.3.0.js"></script>
+    <script src="/static/association/js/bootstrap-wysihtml5-0.0.2.js"></script>
+    <script src="/static/association/js/bootstrap.datepicker.js"></script>
+    <script src="/static/association/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/static/association/js/jquery.uniform.min.js"></script>
+    <script src="/static/association/js/select2.min.js"></script>
+    <script src="/static/association/js/theme.js"></script>
+
+    <!-- call this page plugins -->
+    <script type="text/javascript">
+        $(function () {
+
+            // add uniform plugin styles to html elements
+            $("input:checkbox, input:radio").uniform();
+
+            // select2 plugin for select elements
+            $(".select2").select2({
+                placeholder: "选择一个标签"
+            });
+
+            // datepicker plugin
+            $('.datepicker').datepicker().on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
+
+            $('.datetimepicker').datetimepicker()
+
+            // wysihtml5 plugin on textarea
+            $(".wysihtml5").wysihtml5({
+                "font-styles": false
+            });
+        });
+    </script>
+{% endblock %}

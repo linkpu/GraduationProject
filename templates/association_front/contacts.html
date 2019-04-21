@@ -1,0 +1,62 @@
+﻿{% extends 'association_front/front_base.html' %}
+{% load static %}
+
+{% block title %}Contacts{% endblock title %}
+
+{% block content %}
+    <div class="breadcrumbs-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href="{% url 'association:index' %}" class="home"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+            <li><a>Contacts</a></li>
+        </ul>
+    </div>
+    <!-- breadcrumbs-wrapper -->
+    <section class="content-wrapper">
+        <div class="container">
+            <div class="title">
+                <h1>Contacts</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="clear">
+                        <div class="contact-block pic1">
+                            <h5>Meet Us</h5>
+                            <p>Jesper street, Uzbekistan 29 A 33 Avenue</p>
+                        </div>
+                        <div class="contact-block pic2">
+                            <h5>Phone</h5>
+                            <p>8 (800) 222-22-22 <br> 8 (800) 222-22-33</p>
+                        </div>
+                        <div class="contact-block pic3">
+                            <h5>E-mail</h5>
+                            <p>minikeevdesign@gmail.com</p>
+                        </div>
+                        <div class="contact-block pic4">
+                            <h5>Site</h5>
+                            <p><a href="http://namewebsite.com">http://namewebsite.com</a></p>
+                        </div>
+                    </div>
+                    <p><i>Mauris ornare elit sem, eget tempor libero vestibulum id. Curabitur ultrices lacinia convallis. Praesent ac quam at est accumsan aliquam. Cras odio turpis, scelerisque vestibulum maximus eget, suscipit eu nulla. Nullam sodales, tortor eu egestas pharetra, metus sem fermentum lorem, a vestibulum lectus erat eget lorem. Morbi ullamcorper tincidunt lorem sed lacinia. Cras vel pulvinar mauris. Phasellus eget suscipit ex, sed consequat velit. Praesent nec lobortis enim, eget feugiat quam. Praesent quis sollicitudin sem. Proin a elementum urna, vel venenatis quam. Etiam augue turpis, gravida a fringilla id, viverra in lectus. In luctus ipsum vel nunc pharetra, sit amet dictum sapien elementum. Aliquam eu ornare turpis.</i></p>
+                </div>
+                <div class="col-md-4 contact-area">
+                    <h4>Contact Form</h4>
+                    <div class="input-block name-form">
+                        <input type="text" placeholder="Name">
+                    </div>
+                    <div class="input-block phone-form">
+                        <input type="text" placeholder="Phone">
+                    </div>
+                    <div class="input-block email-form">
+                        <input type="text" placeholder="E-mail">
+                    </div>
+                    <div class="input-block message-form">
+                        <textarea placeholder="Message"></textarea>
+                    </div>
+                    <input type="submit" value="Send Message">
+                </div>
+            </div>
+            <div class="map"></div>
+        </div>
+    </section>
+    <!-- content-wrapper -->
+{% endblock content %}

@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <!---<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">--->
+    <link rel="stylesheet" href="{% static 'association_front/css/bootstrap.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'association_front/css/font-awesome.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'association_front/css/style.css' %}" type="text/css" />
+    <!--[if IE]>
+    <script src="{% static 'association_front/js/html5.js' %}"></script>
+    <![endif]-->
+    <style>
+
+    </style>
+    {% block linkscript %}
+    {% endblock linkscript %}
+</head>
+<body>
+    <div id="page-preloader"><span class="spinner"></span></div>
+    <header id="header" class="clear">
+        <a href="{% url 'association:index' %}" class="logo">Matsumari</a>
+        <div class="header-right">
+            <div class="header-search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav menu">
+                    <li class="dropdown"><a href="{% url 'association:index' %}">Home</a></li>
+                    <li><a href="{% url 'association:dynamic' %}">Blog</a></li>
+                    <li><a href="{% url 'association:gallery' %}">Gallery</a></li>
+                    <li><a href="{% url 'association:about' %}">About Us</a></li>
+                    <li><a href="{% url 'association:contacts' %}">Contacts</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    {% block content %}
+    {% endblock content %}
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{% url 'association:index' %}" class="logo">Matsumari</a>
+                    <p>Etiam dictum purus et leo laoreet, vel congue diam pulvinar. Suspendisse elementum dictum lacus id ultricies. In hac habitasse platea dictumst</p>
+                    <div class="copy">Copyright &copy; 2017.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>
+                </div>
+                <div class="col-md-3">
+                    <h6>Latest news</h6>
+                    <div class="news-footer">
+                        <a href="blog_inner.html">Praesent ullamcorper sodales</a>
+                        <div class="date">14.11.2016</div>
+                    </div>
+                    <div class="news-footer">
+                        <a href="blog_inner.html">Fusce sollicitudin felis vel</a>
+                        <div class="date">14.11.2016</div>
+                    </div>
+                    <div class="news-footer">
+                        <a href="blog_inner.html">Phasellus vitae dictum urna</a>
+                        <div class="date">14.11.2016</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>Best Posts</h6>
+                    <ul class="footer-menu">
+                        <li><a href="{% url 'association:about' %}">About us</a></li>
+                        <li><a href="">Sitemap</a></li>
+                        <li><a href="{% url 'association:contacts' %}">Contacts</a></li>
+                        <li><a href="{% url 'association:dynamic' %}">Dynamic</a></li>
+                        <li><a href="{% url 'association:gallery' %}">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Contacts</h6>
+                    <address>Duis volutpat et magna quis congue. Nullam non velit porta, vulputate odio tempus, volutpat nibh. Mauris dictum dolor non interdum auctor</address>
+                    <div class="footer-phone"><i class="fa fa-phone" aria-hidden="true"></i> +1 (123) 456 78 90</div>
+                </div>
+            </div>
+            <ul class="social">
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+    <!-- footer -->
+    <!-- scripts -->
+    <script src="{% static 'association_front/js/lib/jquery.js' %}"></script>
+    <script src="{% static 'association_front/js/lib/bootstrap.min.js' %}"></script>
+    <script src="{% static 'association_front/js/lib/lightbox.min.js' %}"></script>
+    <script src="{% static 'association_front/js/lib/shuffle.js' %}"></script>
+    <script src="{% static 'association_front/js/lib/swiper.min.js' %}"></script>
+    <script src="{% static 'association_front/js/lib/waypoints.min.js' %}"></script>
+    <script src="{% static 'association_front/js/script.js' %}"></script>
+    {% block script %}
+    {% endblock script %}
+</body>
+</html>

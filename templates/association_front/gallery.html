@@ -1,0 +1,48 @@
+﻿{% extends 'association_front/front_base.html' %}
+{% load static %}
+
+{% block title %}Gallery{% endblock title %}
+
+{% block content %}
+    <div class="breadcrumbs-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href="{% url 'association:index' %}" class="home"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+            <li><a>Gallery</a></li>
+        </ul>
+    </div>
+    <!-- breadcrumbs-wrapper -->
+    <section class="content-wrapper">
+        <div class="container">
+            <div class="title">
+                <h1>Gallery</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img1.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img1.jpg' %}" alt=""></a>
+                </div>
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img2.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img2.jpg' %}" alt=""></a>
+                </div>
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img3.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img3.jpg' %}" alt=""></a>
+                </div>
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img4.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img4.jpg' %}" alt=""></a>
+                </div>
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img5.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img5.jpg' %}" alt=""></a>
+                </div>
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img6.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img6.jpg' %}" alt=""></a>
+                </div>
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img7.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img7.jpg' %}" alt=""></a>
+                </div>
+                <div class="col-md-3 gallery-item">
+                    <a href="{% static 'association_front/img/img8.jpg' %}" data-lightbox="example-set"><img src="{% static 'association_front/img/img8.jpg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- content-wrapper -->
+{% endblock content %}

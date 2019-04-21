@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>社团注册</title>
+
+    <!-- bootstrap -->
+    <link href="/static/association/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="/static/association/css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/static/association/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="/static/association/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/static/association/css/elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/association/css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="/static/association/css/lib/font-awesome.css"/>
+
+
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="/static/association/css/compiled/signup.css" type="text/css" media="screen"/>
+
+    <!-- open sans font -->
+    <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'/>
+
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="header">
+        <a href="index.html">
+            <img src="/static/association/img/logo.png" class="logo"/>
+        </a>
+    </div>
+    <div class="row-fluid login-wrapper">
+        <div class="box">
+            <div class="content-wrap">
+                <h6>Sign Up</h6>
+                <form id="register" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <select class="span12" style="margin-bottom: 10px" id="school_area">
+                        <option value="" class="default">--学校所在地--</option>
+                    </select>
+                    <br/>
+                    <select class="span12" style="margin-bottom: 10px" name="school" id="school">
+                        <option value="" class="default">--学校--</option>
+                    </select>{{ form.errors.school }}
+                    <input class="span12" type="text" id="association_name" name="association_name" placeholder="社团全称"/>{{ form.errors.association_name }}
+                    <select class="span12" style="margin-bottom: 10px" name="association_type">
+                        <option value="" selected class="default">--社团类型--</option><p>{{ form.errors.association_type }}</p>
+                        {% for t in type %}
+                            <option value="{{ t.0 }}">{{ t.1 }}</option>
+                        {% endfor %}
+
+                    </select>
+                    <textarea class="span12" id="association_desc" name="association_info" placeholder="社团描述"></textarea>{{ form.errors.association_info }}
+                    <input class="span12" type="password" id="password" name="password" placeholder="设置密码"/>{{ form.errors.password }}
+                    <input class="span12" type="password" id="confirm_pwd" name="confirm_pwd" placeholder="确认密码"/>{{ form.errors.confirm_pwd }}
+                    <input class="span12" type="text" name="" placeholder="联系邮箱"/>{{ form.errors.association_mail }}
+                    <input class="span12" type="text" id="association_tel" name="association_tel" placeholder="联系电话"/>{{ form.errors.association_tel }}
+                    {#                <input class="span12" type="text" placeholder="验证码" />#}
+                    <input class="span12" type="file" style="padding-top: 5px; padding-bottom: 5px;" id="apply-file" name="apply_file" placeholder="申请材料"/>{{ form.errors.apply_file }}
+                    <input class="btn-glow primary signup" style="margin-top: 20px;" type="submit" value="提交">
+                </form>
+            </div>
+        </div>
+
+        <div class="span4 already">
+            <p>Already have an account?</p>
+            <a href="/association/login/">Sign in</a>
+        </div>
+    </div>
+    <!-- scripts -->
+    <script src="/static/association/js/theme.js"></script>
+    <script src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/js/select_school.js"></script>
+    <script src="/static/association/js/jquery-latest.js"></script>
+    <script src="/static/association/js/bootstrap.min.js"></script>
+</body>
+</html>

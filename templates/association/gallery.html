@@ -1,0 +1,362 @@
+{% extends 'association/base.html' %}
+
+{% block title %}Detail Admin - Gallery{% endblock %}
+
+{% block linkscript %}
+    <!-- this page specific styles -->
+
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css'>
+{#	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'>#}
+	<link rel="stylesheet" href="/static/plugins/gallery_list/css/style.css">
+    <link rel="stylesheet" href="/static/association/css/compiled/gallery.css" type="text/css" media="screen" />
+    <link href="/static/association/css/lib/select2.css" type="text/css" rel="stylesheet" />
+{#    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
+
+    <!-- photos -->
+{#    <link rel="stylesheet" type="text/css" href="/static/plugins/photos/css/default.css">#}
+{#	<link rel="stylesheet" type="text/css" href="/static/plugins/photos/css/styles.css">#}
+    <style>
+    .article {
+  display: block;
+  margin: 0 0 30px 0;
+  padding: 12px;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  transition: all 220ms;
+}
+.article:hover {
+  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  transition: all 220ms;
+}
+.article > img {
+  display: block;
+  width: 100%;
+  margin: 0 0 24px 0;
+}
+.article h2 {
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+}
+
+.wall {
+  display: block;
+  position: relative;
+}
+.wall-column {
+  display: block;
+  position: relative;
+  width: 25%;
+  float: left;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+@media (max-width: 640px) {
+  .wall-column {
+    width: 50%;
+  }
+}
+@media (max-width: 480px) {
+  .wall-column {
+    width: auto;
+    float: none;
+  }
+}
+    </style>
+
+
+    <!-- open sans font -->
+    <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+{% endblock %}
+
+
+{% block navbar %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <!-- sidebar -->
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li>
+                <a href="index.html">
+                    <i class="icon-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="chart-showcase.html">
+                    <i class="icon-signal"></i>
+                    <span>Charts</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>社团成员</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/association/member_list/">成员列表</a></li>
+                    <li><a href="/association/new_member/">添加成员</a></li>
+                    <li><a href="user-profile.html">User profile</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-edit"></i>
+                    <span>活动管理</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/association/activity_list/">活动列表</a></li>
+                    <li><a href="/association/create_activity/">创建活动</a></li>
+                    <li><a href="activity-wizard.html">Form wizard</a></li>
+                </ul>
+            </li>
+            <li class="active">
+                <a href="/association/gallery_list//">
+                    <div class="pointer">
+                        <div class="arrow"></div>
+                        <div class="arrow_border"></div>
+                    </div>
+                    <i class="icon-picture"></i>
+                    <span>社团相册</span>
+                </a>
+            </li>
+            <li>
+                <a href="calendar.html">
+                    <i class="icon-calendar-empty"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li>
+                <a href="tables.html">
+                    <i class="icon-th-large"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle ui-elements" href="#">
+                    <i class="icon-code-fork"></i>
+                    <span>UI Elements</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="ui-elements.html">UI Elements</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="personal-info.html">
+                    <i class="icon-cog"></i>
+                    <span>My Info</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-share-alt"></i>
+                    <span>Extras</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="code-editor.html">Code editor</a></li>
+                    <li><a href="grids.html">Grids</a></li>
+                    <li><a href="signin.html">Sign in</a></li>
+                    <li><a href="signup.html">Sign up</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+
+	<!-- main container -->
+    <div class="content">
+        {% csrf_token %}
+        <!-- settings changer -->
+        <div class="skins-nav">
+            <a href="#" class="skin first_nav selected">
+                <span class="icon"></span><span class="text">Default</span>
+            </a>
+            <a href="#" class="skin second_nav" data-file="/static/academy/css/skins/dark.css">
+                <span class="icon"></span><span class="text">Dark skin</span>
+            </a>
+        </div>
+        
+        <div class="container-fluid">
+            <div id="pad-wrapper" class="gallery">
+                <div class="row-fluid header">
+                    <h3>Gallery</h3>
+                </div>
+                <!-- gallery wrapper -->
+                <div class="container">
+                    <a class="btn-glow primary">新建相册</a>
+                    <div class="mhn-slide owl-carousel">
+                        {% for pd in page_data %}
+                            <div class="mhn-item">
+                                <div class="mhn-inner" onclick="enter_gallery({{ pd.id }})">
+                                    <img src="/media/{{ pd.head_photo }}">
+                                    <div class="mhn-img" style="background-image: url('/media/{{ pd.head_photo }}')"><div class="loader-circle"><div class="loader-stroke-left"></div><div class="loader-stroke-right"></div></div></div>
+                                    <div class="mhn-text">
+                                        <h4>{{ pd.gallery_name }}</h4>
+                                        <p>{{ pd.describe }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- new image button -->
+
+{#                <div class="gallery-wrapper">#}
+{#                    <div class="row gallery-row">#}
+{##}
+{##}
+{#                        <!-- new image button -->#}
+{#                        <div class="span3 new-img" id="new-gallery">#}
+{#                            <img src="/static/association/img/new-gallery-img.png" />#}
+{#                        </div>#}
+{##}
+{##}
+{#                        <!-- edit image pop up -->#}
+{#                        <div class="popup" id="new_form" STYLE="display: none">#}
+{#                            <form method="post" action="/association/gallery_list/" enctype="multipart/form-data">#}
+{#                                {% csrf_token %}#}
+{#                                <input type="hidden" id="gallery_id" value="">#}
+{#                                <div class="pointer">#}
+{#                                    <div class="arrow"></div>#}
+{#                                    <div class="arrow_border"></div>#}
+{#                                </div>#}
+{#                                <i class="close-pop table-delete"></i>#}
+{#                                <h5>编辑相册</h5>#}
+{#                                <div class="thumb">#}
+{#                                    <img id="headphoto" style="width: 90px; height: 90px;" onclick="changeHeader()" src="/static/association/img/gallery-preview.jpg" />#}
+{#                                    <input type="file" style="display: none" name="head_photo" id="headfile" onchange="showPhoto(this)">#}
+{#                                </div>#}
+{#                                <div class="title">#}
+{#                                    <input type="text" id="gallery_name" name="gallery_name" class="inline-input" placeholder="新建相册" />#}
+{#                                    <div class="field-box">#}
+{#                                        <select id="activity" name="activity_id" class="select2">#}
+{#                                            <option value="none" />绑定活动(可选)#}
+{#                                            <option value="AK" />Alaska#}
+{#                                            <option value="HI" />Hawaii#}
+{#                                        </select>#}
+{#                                    </div>#}
+{#                                    <br>#}
+{#                                    <div class="ui-select">#}
+{#                                        <select id="permission" name="gallery_permission">#}
+{#                                            {% for p in permissions %}#}
+{#                                                <option value="{{ p.0 }}" />{{ p.1 }}#}
+{#                                            {% endfor %}#}
+{#                                        </select>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="description">#}
+{#                                    <h6>相册描述</h6>#}
+{#                                    <textarea id="discribe" name="gallery_describe"></textarea>#}
+{#                                    <input type="submit" id="gallery_submit" value="保存" class="btn-glow primary" />#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+                 <!-- end gallery wrapper -->
+
+                 <!-- blank state -->
+                <div class="no-gallery">
+                    <div class="row-fluid header">
+                        <h3 id="gallery_title" g-id="">Gallery Blank State</h3>
+                    </div>
+                    <div id="gallery_imgs" class="row gallery-row">
+                        <div class="wall" id="photos">
+{#                            <a class="article" href="#">#}
+{#                            <img src="img/1.jpg" />#}
+{#                            <h2>Cursus cursus proin auctor in in ac, nunc, tortor</h2>#}
+{#                            </a>#}
+{#                            <div class="article">#}
+{#                            <img src="img/2.jpg" />#}
+{#                            <h2>Cursus cursus proin auctor in in ac, nunc, tortor</h2>#}
+{#                            </div>#}
+
+                        </div>
+
+
+                        <!-- new image button -->
+                        <div class="span3 new-img" id="new-img">
+                            <img src="/static/association/img/new-gallery-img.png" onclick="upload_img()" />
+                            <input type="file" style="display: none" onchange="upload_file(this)" id="image">
+                        </div>
+
+                    </div>
+{#                    <div class="center">#}
+{#                        <img src="/static/association/img/no-img-gallery.png" />#}
+{#                        <h6>You don't have any images</h6>#}
+{#                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</p>#}
+{#                        <a class="btn-glow primary">Add new image</a>#}
+{#                    </div>#}
+                </div>
+                <!-- end blank state -->
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+{% endblock %}
+
+{% block script %}
+	<!-- this page scripts -->
+    <script src="/static/association/js/select2.min.js"></script>
+    <script src="/static/association/js/theme.js"></script>
+    <script src="/static/association/js/gallery.js"></script>
+    <!-- gallery list -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js'></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.mhn-slide').owlCarousel({
+				nav:true,
+				//loop:true,
+				slideBy:'page',
+				rewind:false,
+				responsive:{
+					0:{items:1},
+					480:{items:2},
+					600:{items:3},
+					1000:{items:4}
+				},
+				smartSpeed:70,
+				onInitialized:function(e){
+					$(e.target).find('img').each(function(){
+						if(this.complete){
+							$(this).closest('.mhn-inner').find('.loader-circle').hide();
+							{#$(this).closest('.mhn-inner').find('.mhn-img').css('background-image','url('+$(e.target).attr('src')+')');#}
+						}else{
+							$(this).bind('load',function(e){
+								$(e.target).closest('.mhn-inner').find('.loader-circle').hide();
+								{#$(e.target).closest('.mhn-inner').find('.mhn-img').css('background-image','url('+$(e.target).attr('src')+')');#}
+							});
+						}
+					});
+				},
+				navText:['<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>','<svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>']
+			});
+		});
+	</script>
+
+    <!-- photos -->
+{#	<script src="/static/plugins/photos/js/jquery-2.1.1.min.js" type="text/javascript"></script>#}
+	<script type="text/javascript" src="/static/plugins/photos/js/jaliswall.js"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            // select2 plugin for select elements
+            $(".select2").select2({
+                placeholder: "选择一个标签"
+            });
+        });
+    </script>
+{% endblock %}

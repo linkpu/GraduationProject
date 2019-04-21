@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home
+{% endblock title %}
+{#<div id="wrapper" class="home-page"> #}
+{% block header %}
+
+    <li class="active"><a class="waves-effect waves-dark" href="/station/index">Home</a></li>
+    <li class="dropdown">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle waves-effect waves-dark">About Us <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a class="waves-effect waves-dark" href="/station/about">Company</a></li>
+            <li><a class="waves-effect waves-dark" href="#">Our Team</a></li>
+            <li><a class="waves-effect waves-dark" href="#">News</a></li>
+            <li><a class="waves-effect waves-dark" href="#">Investors</a></li>
+        </ul>
+    </li>
+    <li><a class="waves-effect waves-dark" href="/station/services">Services</a></li>
+    <li><a class="waves-effect waves-dark" href="/station/portfolio">Portfolio</a></li>
+    <li><a class="waves-effect waves-dark" href="/station/pricing">Pricing</a></li>
+    <li><a class="waves-effect waves-dark" href="/station/contact">Contact</a></li>
+
+{% endblock header %}
+{% block content %}
+	<section id="banner">
+	 
+	<!-- Slider -->
+        <div id="main-slider" class="flexslider">
+            <ul class="slides">
+              <li>
+                <img src="/static/station/img/slides/1.jpg" alt="" />
+                <div class="flex-caption">
+                    <h3>Material Design</h3> 
+					<p>We create the opportunities</p> 
+					 
+                </div>
+              </li>
+              <li>
+                <img src="/static/station/img/slides/2.jpg" alt="" />
+                <div class="flex-caption">
+                    <h3>Bootstrap </h3> 
+					<p>Success depends on originality</p> 
+					 
+                </div>
+              </li>
+            </ul>
+        </div>
+	<!-- end slider --> 
+	</section>  
+	<section id="content"> 
+	<div class="container">
+	    	<div class="row">
+			<div class="col-md-12">
+				<div class="aligncenter"><h2 class="aligncenter">Our Services</h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, <br/>doloribus omnis minus ovident, doloribus omnis minus temporibus perferendis nesciunt..</div>
+				<br/>
+			</div>
+		</div>
+
+	 <div class="row">
+            <div class="col-sm-4 info-blocks"> 
+				<i class="icon-info-blocks material-icons">filter_drama</i>
+                <div class="info-blocks-in">
+                    <h3>UI Design</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks material-icons">input</i>
+                <div class="info-blocks-in">
+                    <h3>Material</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks material-icons">power_settings_new</i>
+                <div class="info-blocks-in">
+                    <h3>Bootstrap</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+        </div>
+<div class="row">
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks material-icons">chat_bubble_outline</i>
+                <div class="info-blocks-in">
+                    <h3>HTML5/CSS3</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks material-icons">repeat</i>
+                <div class="info-blocks-in">
+                    <h3>Fully Responsive</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks material-icons">tab_unselected</i>
+                <div class="info-blocks-in">
+                    <h3>Mobile</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+        </div>
+	</div>
+	</section>
+	
+	<section class="section-padding gray-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title text-center">
+						<h2>Our Company</h2>
+						<p>Curabitur aliquet quam id dui posuere blandit. Donec sollicitudin molestie malesuada Pellentesque <br>ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis porttitor volutpat.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+					<div class="about-text">
+						<p>Grids is a responsive Multipurpose Template. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit. Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis porttitor volutpat.</p>
+
+						<ul class="withArrow">
+							<li><span class="fa fa-angle-right"></span> Lorem ipsum dolor sit amet</li>
+							<li><span class="fa fa-angle-right"></span> consectetur adipiscing elit</li>
+							<li><span class="fa fa-angle-right"></span> Curabitur aliquet quam id dui</li>
+							<li><span class="fa fa-angle-right"></span> Donec sollicitudin molestie malesuada.</li>
+						</ul>
+						<a href="#" class="btn btn-primary waves-effect waves-dark">Learn More</a>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<div class="about-image">
+						<img src="/static/station/img/about.jpg" alt="About Images">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	  
+	
+	
+	<div class="about home-about">
+		<div class="container">
+						
+            <div class="row">
+                <div class="col-md-4">
+                <div class="block-heading-two">
+                    <h3><span>Features</span></h3>
+                    </div>
+                <div class="tab-section">
+                    <div class="s12">
+                    <ul class="tabs">
+                    <li class="tab col s4"><a href="#test1" class="waves-effect waves-dark">Test 1</a></li>
+                    <li class="tab col s4"><a class="waves-effect waves-dark active" href="#test2">Test 2</a></li>
+                    <li class="tab col s4"><a href="#test3" class="waves-effect waves-dark">Test 3</a></li>
+                    </ul>
+                    </div>
+                    <div id="test1" class="col s12 container">Ande omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur. </div>
+                    <div id="test2" class="col s12 container">Terspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur. </div>
+                    <div id="test3" class="col s12 container">Perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur. </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="block-heading-two">
+                        <h3><span>Latest News</span></h3>
+                    </div>
+                    <!-- Accordion starts -->
+                    <ul class="collapsible" id="accordionSection" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header active"><i class="material-icons">filter_drama</i>First</div>
+                            <div class="collapsible-body"><p>Perspiciaatis unde omnis iste natus error Nemo enim ipsam voluptatem quia voluptas sit aspernatur. sit voluptatem accusanti</p></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                            <div class="collapsible-body"><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur. Perspiciaatis unde omnis iste natus error sit voluptatem accusanti</p></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                            <div class="collapsible-body"><p>Perspiciaatis Nemo enim ipsam voluptatem quia voluptas sit aspernatur. unde omnis iste natus error sit voluptatem accusanti</p></div>
+                        </li>
+                    </ul>
+                                             <!-- Accordion ends -->
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="block-heading-two">
+                        <h3><span>Testimonials</span></h3>
+                    </div>
+                    <div class="testimonials">
+                        <div class="active item">
+                            <blockquote><p>Lorem ipsum dolor met consectetur adipisicing. Aorem psum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.</p></blockquote>
+                            <div class="carousel-info">
+                                <img alt="" src="/static/station/img/team4.jpg" class="pull-left">
+                                <div class="pull-left">
+                                    <span class="testimonials-name">Marc Cooper</span>
+                                    <span class="testimonials-post">Technical Director</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <br>
+
+        </div>
+
+    </div>
+					
+					
+{% endblock content %}
